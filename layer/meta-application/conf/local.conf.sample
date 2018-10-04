@@ -74,8 +74,8 @@ PARALLEL_MAKE = "-j 8"
 #
 # The default is a downloads directory under TOPDIR which is the build directory.
 #
-#DL_DIR ?= "${TOPDIR}/downloads"
-DL_DIR ?= "/mnt/yocto/downloads"
+DL_DIR ?= "${TOPDIR}/downloads"
+#DL_DIR ?= "/mnt/yocto/downloads"
 
 #
 # Where to place shared-state files
@@ -91,8 +91,8 @@ DL_DIR ?= "/mnt/yocto/downloads"
 #
 # The default is a sstate-cache directory under TOPDIR.
 #
-#SSTATE_DIR ?= "${TOPDIR}/sstate-cache"
-SSTATE_DIR ?= "/mnt/yocto/sstate-cache"
+SSTATE_DIR ?= "${TOPDIR}/sstate-cache"
+#SSTATE_DIR ?= "/mnt/yocto/sstate-cache"
 
 #
 # Where to place the build output
@@ -104,8 +104,8 @@ SSTATE_DIR ?= "/mnt/yocto/sstate-cache"
 #
 # The default is a tmp directory under TOPDIR.
 #
-#TMPDIR = "${TOPDIR}/tmp"
-TMPDIR = "/mnt/yocto/tmp"
+TMPDIR = "${TOPDIR}/tmp"
+#TMPDIR = "/mnt/yocto/tmp"
 
 #
 # Default policy config
