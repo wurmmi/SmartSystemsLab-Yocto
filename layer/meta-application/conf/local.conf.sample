@@ -315,13 +315,6 @@ VIRTUAL-RUNTIME_initscripts = "systemd-compat-units"
 
 
 # application
-CORE_IMAGE_EXTRA_INSTALL += "mpu9250-mod"
-CORE_IMAGE_EXTRA_INSTALL += "apds9301-mod"
-CORE_IMAGE_EXTRA_INSTALL += "sevensegment-mod"
-CORE_IMAGE_EXTRA_INSTALL += "hc1000-mod"
-CORE_IMAGE_EXTRA_INSTALL += "sensorplatform"
-#CORE_IMAGE_EXTRA_INSTALL += "iiotapp"
-#CORE_IMAGE_EXTRA_INSTALL += "managementif"
 CORE_IMAGE_EXTRA_INSTALL += "debugservice"
 CORE_IMAGE_EXTRA_INSTALL += "debugif"
 
