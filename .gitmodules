@@ -1,0 +1,20 @@
+[submodule "poky"]
+	path = poky
+	url = git://git.yoctoproject.org/poky.git
+    branch = rocko
+[submodule "layer/meta-altera"]
+	path = layer/meta-altera
+	url = git://github.com/kraj/meta-altera.git
+    branch = rocko
+[submodule "layer/meta-linaro"]
+	path = layer/meta-linaro
+	url = git://git.linaro.org/openembedded/meta-linaro.git
+    branch = rocko
+[submodule "layer/meta-mingw"]
+	path = layer/meta-mingw
+	url = http://git.yoctoproject.org/cgit.cgi/meta-mingw
+    branch = rocko
+[submodule "layer/meta-openembedded"]
+	path = layer/meta-openembedded
+    url = https://github.com/openembedded/meta-openembedded.git
+    branch = rocko
