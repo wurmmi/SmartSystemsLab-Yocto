@@ -75,7 +75,6 @@ PARALLEL_MAKE = "-j 8"
 # The default is a downloads directory under TOPDIR which is the build directory.
 #
 DL_DIR ?= "${TOPDIR}/downloads"
-#DL_DIR ?= "/mnt/yocto/downloads"
 
 #
 # Where to place shared-state files
@@ -92,7 +91,6 @@ DL_DIR ?= "${TOPDIR}/downloads"
 # The default is a sstate-cache directory under TOPDIR.
 #
 SSTATE_DIR ?= "${TOPDIR}/sstate-cache"
-#SSTATE_DIR ?= "/mnt/yocto/sstate-cache"
 
 #
 # Where to place the build output
@@ -105,7 +103,6 @@ SSTATE_DIR ?= "${TOPDIR}/sstate-cache"
 # The default is a tmp directory under TOPDIR.
 #
 TMPDIR = "${TOPDIR}/tmp"
-#TMPDIR = "/mnt/yocto/tmp"
 
 #
 # Default policy config
@@ -318,7 +315,11 @@ VIRTUAL-RUNTIME_initscripts = "systemd-compat-units"
 CORE_IMAGE_EXTRA_INSTALL += "debugservice"
 CORE_IMAGE_EXTRA_INSTALL += "debugif"
 
+# include static lib and headers in sdk
+TOOLCHAIN_TARGET_TASK += "libfpgaregion-dev libfpgaregion-staticdev"
 
+TOOLCHAIN_TARGET_TASK += "libwebsockets-dev"
+TOOLCHAIN_TARGET_TASK += "poco-dev"
 
 # additional software
 CORE_IMAGE_EXTRA_INSTALL += "htop"
@@ -330,7 +331,6 @@ CORE_IMAGE_EXTRA_INSTALL += "ntp"
 
 CORE_IMAGE_EXTRA_INSTALL += "screen"
 CORE_IMAGE_EXTRA_INSTALL += "libwebsockets"
-CORE_IMAGE_EXTRA_INSTALL += "libwebsockets-dev"
 CORE_IMAGE_EXTRA_INSTALL += "nginx"
 CORE_IMAGE_EXTRA_INSTALL += "opkg"
 CORE_IMAGE_EXTRA_INSTALL += "nano"
@@ -347,7 +347,6 @@ CORE_IMAGE_EXTRA_INSTALL += "iftop"
 CORE_IMAGE_EXTRA_INSTALL += "sysstat"
 
 CORE_IMAGE_EXTRA_INSTALL += "poco"
-CORE_IMAGE_EXTRA_INSTALL += "poco-dev"
 
 CORE_IMAGE_EXTRA_INSTALL += "dhcp-client"
 
