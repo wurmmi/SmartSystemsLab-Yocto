@@ -26,6 +26,9 @@ do_install() {
     install -d ${D}${bindir}
     install -c -m 0755 ${GIT}/VisualGDB/Release/DebugService ${D}${bindir}/debugservice
 
+    # install empty firmware dir if not existing to store fpga bitfile
+    install -d -m 0755 ${D}${base_libdir}/firmware
+
     # install config
     install -d ${D}${sysconfdir}/debugservice
 }
@@ -33,6 +36,7 @@ do_install() {
 FILES_${PN} = "${base_libdir}/systemd/system/debugservice.service"
 FILES_${PN} += "${bindir}/debugservice"
 FILES_${PN} += "${sysconfdir}/debugservice"
+FILES_${PN} += "${base_libdir}/firmware"
 
 # As this package is tied to systemd, only build it when we're also building systemd.
 python () {
