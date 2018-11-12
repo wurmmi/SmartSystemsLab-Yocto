@@ -1,4 +1,4 @@
-DESCRIPTION = "IIoT App"
+DESCRIPTION = "DebugService daemon"
 SECTION = "base"
 LICENSE = "CLOSED"
 FILESEXTRAPATHS_prepend := "${THISDIR}/files/:"
