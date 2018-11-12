@@ -1,12 +1,9 @@
 [Unit]
 Description=DebugService daemon
-Wants=network-online.target
-After=network-online.target
 
 [Service]
 ExecStart=/usr/bin/debugservice
 ExecStop=/usr/bin/killall -s KILL debugservice
-
 
 [Install]
 WantedBy=basic.target
