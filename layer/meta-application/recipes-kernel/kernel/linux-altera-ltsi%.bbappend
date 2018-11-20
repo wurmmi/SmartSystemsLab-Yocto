@@ -47,8 +47,8 @@ SRC_URI += "file://cpufreq.cfg"
 # add custom dts
 SRC_URI += "file://socfpga_cyclone5_de1_soc.dts"
 
-do_unpack_extra(){
+unpack_extra(){
     cp ${WORKDIR}/socfpga_cyclone5_de1_soc.dts ${WORKDIR}/git/arch/arm/boot/dts/socfpga_cyclone5_de1_soc.dts
 }
 
-addtask unpack_extra after do_unpack before do_patch
+do_unpack[postfuncs] += "unpack_extra"
