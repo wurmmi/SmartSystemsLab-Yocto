@@ -4,14 +4,13 @@ LICENSE = "CLOSED"
 FILESEXTRAPATHS_prepend := "${THISDIR}/files/:"
 
 SRC_URI = "git://gitlab.fh-ooe.at/smart_systems_lab/debug_service.git;protocol=https;user=gitlab+deploy-token-9:vh-CHWx5PRx8Bu1Sf-4a;branch=master"
-SRCREV = "${AUTOREV}"
-
 SRC_URI += "file://debugservice.service"
+
+SRCREV = "${AUTOREV}"
 
 SYSTEMD_SERVICE_${PN} = "debugservice.service"
 
-DEPENDS = "systemd"
-RDEPENDS_${PN} = "systemd poco-net poco-util poco-foundation poco-json libssl libcrypto libgpiod"
+RDEPENDS_${PN} = "poco-net poco-util poco-foundation poco-json libssl libcrypto libgpiod"
 
 inherit systemd
 
