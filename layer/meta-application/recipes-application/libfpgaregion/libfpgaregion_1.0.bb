@@ -3,7 +3,7 @@ SECTION = "base"
 LICENSE = "CLOSED"
 FILESEXTRAPATHS_prepend := "${THISDIR}/files/:"
 
-SRC_URI = "git://gitlab.fh-ooe.at/smart_systems_lab/debug_service.git;protocol=https;user=gitlab+deploy-token-5:QbxxCZf4MsTZxr9dnAkZ;branch=master"
+SRC_URI = "git://gitlab.fh-ooe.at/smart_systems_lab/debug_service.git;protocol=https;user=gitlab+deploy-token-10:4bLmX-7XMooXQzyrWs-P;branch=master"
 SRCREV = "${AUTOREV}"
 
 PACKAGES = "${PN} ${PN}-dev ${PN}-dbg ${PN}-staticdev"
