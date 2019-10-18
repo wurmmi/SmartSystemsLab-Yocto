@@ -10,11 +10,22 @@ SRCREV = "${AUTOREV}"
 
 SYSTEMD_SERVICE_${PN} = "debugservice.service"
 
-RDEPENDS_${PN} = "poco-net poco-util poco-foundation poco-json libssl libcrypto libgpiod"
+DEPENDS = "poco openssl libgpiod"
+RDEPENDS_${PN} = "dtc poco libssl libcrypto libgpiod"
+
+TARGET_CC_ARCH += "${LDFLAGS}"
 
 inherit systemd
 
 GIT = "${WORKDIR}/git/"
+S = "${GIT}"
+
+MAKEFILECONFIG = "YOCTO"
+EXTRA_OEMAKE += "'CONFIG=${MAKEFILECONFIG}'"
+
+do_compile () {
+    oe_runmake
+}
 
 do_install() {
     # install service file
@@ -23,7 +34,7 @@ do_install() {
 
     # install binary
     install -d ${D}${bindir}
-    install -c -m 0755 ${GIT}/VisualGDB/Release/DebugService ${D}${bindir}/debugservice
+    install -c -m 0755 ${S}/Release/DebugService ${D}${bindir}/debugservice
 
     # install empty firmware dir if not existing to store fpga bitfile
     install -d -m 0755 ${D}${base_libdir}/firmware

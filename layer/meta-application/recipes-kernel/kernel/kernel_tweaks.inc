@@ -1,3 +1,5 @@
+# Tweaks for kernel build.
+
 # patch to copy kernelimage when updating
 # symlinking is not supported for fat partitions
 
@@ -41,8 +43,9 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 
 SRC_URI += "file://leds.cfg"
 SRC_URI += "file://keys.cfg"
-#SRC_URI += " file://autofs.cfg"
+#SRC_URI += "file://autofs.cfg"
 SRC_URI += "file://cpufreq.cfg"
+SRC_URI += "file://alteravip.cfg"
 
 # add custom dts
 SRC_URI += "file://socfpga_cyclone5_de1_soc.dts"

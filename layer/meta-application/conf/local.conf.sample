@@ -17,17 +17,17 @@ MACHINE = "cyclone5"
 # add kernelheaders to toolchain for developing kernel modules
 TOOLCHAIN_TARGET_TASK_append = " kernel-devsrc"
 
-GCCVERSION = "linaro-7.1"
-SDKGCCVERSION = "linaro-7.1"
+GCCVERSION = "8.2.0"
+SDKGCCVERSION = "8.2.0"
 DEFAULTTUNE = "cortexa9hf-neon"
 
 PREFERRED_PROVIDER_virtual/kernel = "linux-altera-ltsi-rt"
-#PREFERRED_VERSION_linux-alterai-ltsi = "4.9.78%"
-PREFERRED_VERSION_linux-alterai-ltsi-rt = "4.9.76%"
+PREFERRED_VERSION_linux-alterai-ltsi = "4.14.73%"
+PREFERRED_VERSION_linux-alterai-ltsi-rt = "4.14.73%"
 
 PREFERRED_VERSION_u-boot-socfpga = "v2018.03%"
 UBOOT_CONFIG = "de1-soc"
-KERNEL_DEVICETREE = "socfpga_cyclone5_de1_soc.dtb"
+KERNEL_DEVICETREE = " socfpga_cyclone5_de1_soc.dtb "
 UBOOT_EXTLINUX = "1"
 UBOOT_EXTLINUX_FDT_default = "../socfpga_cyclone5_de1_soc.dtb"
 
@@ -51,7 +51,7 @@ PARALLEL_MAKE = "-j 8"
 #
 # The default is a downloads directory under TOPDIR which is the build directory.
 #
-DL_DIR ?= "${TOPDIR}/downloads"
+DL_DIR ?= "/work/downloads"
 
 #
 # Where to place shared-state files
@@ -67,7 +67,7 @@ DL_DIR ?= "${TOPDIR}/downloads"
 #
 # The default is a sstate-cache directory under TOPDIR.
 #
-SSTATE_DIR ?= "${TOPDIR}/sstate-cache"
+SSTATE_DIR ?= "/work/sstate-cache"
 
 #
 # Where to place the build output
@@ -79,7 +79,7 @@ SSTATE_DIR ?= "${TOPDIR}/sstate-cache"
 #
 # The default is a tmp directory under TOPDIR.
 #
-TMPDIR = "${TOPDIR}/tmp"
+TMPDIR = "/work/tmp"
 
 #
 # Default policy config
@@ -109,9 +109,11 @@ DISTRO ?= "poky"
 #  - 'package_rpm' for rpm style packages
 # E.g.: PACKAGE_CLASSES ?= "package_rpm package_deb package_ipk"
 # We default to rpm:
-PACKAGE_CLASSES ?= "package_deb"
+PACKAGE_CLASSES = "package_deb"
 
 
+# Disable not needed distro features
+DISTRO_FEATURES_remove = "x11 3g nfc opengl multiarch wayland vulkan ptest"
 
 # SDK/ADT target architecture
 # https://github.com/MentorEmbedded/meta-mentor/blob/master/conf/local.conf.sample
@@ -137,33 +139,7 @@ TOOLCHAIN_HOST_TASK_remove = "nativesdk-packagegroup-sdk-host"
 #TOOLCHAIN_HOST_TASK_append = " nativesdk-bash"
 
 
-
-
-#
-# Extra image configuration defaults
-#
-# The EXTRA_IMAGE_FEATURES variable allows extra packages to be added to the generated
-# images. Some of these options are added to certain image types automatically. The
-# variable can contain the following options:
-#  "dbg-pkgs"       - add -dbg packages for all installed packages
-#                     (adds symbol information for debugging/profiling)
-#  "dev-pkgs"       - add -dev packages for all installed packages
-#                     (useful if you want to develop against libs in the image)
-#  "ptest-pkgs"     - add -ptest packages for all ptest-enabled packages
-#                     (useful if you want to run the package test suites)
-#  "tools-sdk"      - add development tools (gcc, make, pkgconfig etc.)
-#  "tools-debug"    - add debugging tools (gdb, strace)
-#  "eclipse-debug"  - add Eclipse remote debugging support
-#  "tools-profile"  - add profiling tools (oprofile, lttng, valgrind)
-#  "tools-testapps" - add useful testing tools (ts_print, aplay, arecord etc.)
-#  "debug-tweaks"   - make an image suitable for development
-#                     e.g. ssh root access has a blank password
-# There are other application targets that can be used here too, see
-# meta/classes/image.bbclass and meta/classes/core-image.bbclass for more details.
-# We default to enabling the debugging tweaks.
-EXTRA_IMAGE_FEATURES ?= "tools-debug debug-tweaks ssh-server-openssh package-management"
-# configure package feeds
-PACKAGE_FEED_URIS = "http://192.168.1.100"
+# Handle package revisions see https://wiki.yoctoproject.org/wiki/PR_Service
 PRSERV_HOST = "localhost:0"
 
 #
@@ -180,31 +156,18 @@ PRSERV_HOST = "localhost:0"
 USER_CLASSES ?= "buildstats image-mklibs image-prelink"
 
 
-# User features lets you manipulate the distro features. To add a distro
-# feature, simply add it to USER_FEATURES. To remove, prefix it with ~.
-#
-# # Disable x11
-USER_FEATURES += "~x11"
-USER_FEATURES += "~3g"
-USER_FEATURES += "~nfc"
-
-# auto create image for sdcard
-# other options ext4 tar.gz
-IMAGE_FSTYPES = "wic"
-
-# extend rootfs partition size
-IMAGE_ROOTFS_EXTRA_SPACE = "128000"
-
 
 
 #
 # Runtime testing of images
 #
 # The build system can test booting virtual machine images under qemu (an emulator)
-# after any root filesystems are created and run tests against those images. To
-# enable this uncomment this line. See classes/testimage(-auto).bbclass for
-# further details.
-#TEST_IMAGE = "1"
+# after any root filesystems are created and run tests against those images. It can also
+# run tests against any SDK that are built. To enable this uncomment these lines.
+# See classes/test{image,sdk}.bbclass for further details.
+#IMAGE_CLASSES += "testimage testsdk"
+#TESTIMAGE_AUTO_qemuall = "1"
+
 #
 # Interactive shell configuration
 #
@@ -220,7 +183,7 @@ IMAGE_ROOTFS_EXTRA_SPACE = "128000"
 # Supported values are auto, gnome, xfce, rxvt, screen, konsole (KDE 3.x only), none
 # Note: currently, Konsole support only works for KDE 3.x due to the way
 # newer Konsole versions behave
-#OE_TERMINAL = "gnome"
+#OE_TERMINAL = "auto"
 # By default disable interactive patch resolution (tasks will just fail instead):
 PATCHRESOLVE = "noop"
 
@@ -234,7 +197,7 @@ PATCHRESOLVE = "noop"
 # files and damages the build in ways which may not be easily recoverable.
 # It's necesary to monitor /tmp, if there is no space left the build will fail
 # with very exotic errors.
-BB_DISKMON_DIRS = "\
+BB_DISKMON_DIRS ??= "\
     STOPTASKS,${TMPDIR},1G,100K \
     STOPTASKS,${DL_DIR},1G,100K \
     STOPTASKS,${SSTATE_DIR},1G,100K \
@@ -262,23 +225,33 @@ BB_DISKMON_DIRS = "\
 #file://.* http://someserver.tld/share/sstate/PATH;downloadfilename=PATH \n \
 #file://.* file:///some/local/dir/sstate/PATH"
 
+#
+# Yocto Project SState Mirror
+#
+# The Yocto Project has prebuilt artefacts available for its releases, you can enable
+# use of these by uncommenting the following line. This will mean the build uses
+# the network to check for artefacts at the start of builds, which does slow it down
+# equally, it will also speed up the builds by not having to build things if they are
+# present in the cache. It assumes you can download something faster than you can build it
+# which will depend on your network.
+#
+#SSTATE_MIRRORS ?= "file://.* http://sstate.yoctoproject.org/2.5/PATH;downloadfilename=PATH"
 
 #
 # Qemu configuration
 #
 # By default qemu will build with a builtin VNC server where graphical output can be
-# seen. The two lines below enable the SDL backend too. By default libsdl-native will
+# seen. The two lines below enable the SDL backend too. By default libsdl2-native will
 # be built, if you want to use your host's libSDL instead of the minimal libsdl built
-# by libsdl-native then uncomment the ASSUME_PROVIDED line below.
-#PACKAGECONFIG_append_pn-qemu-native = " sdl"
-#PACKAGECONFIG_append_pn-nativesdk-qemu = " sdl"
-#ASSUME_PROVIDED += "libsdl-native"
+# by libsdl2-native then uncomment the ASSUME_PROVIDED line below.
+PACKAGECONFIG_append_pn-qemu-native = " sdl"
+PACKAGECONFIG_append_pn-nativesdk-qemu = " sdl"
+#ASSUME_PROVIDED += "libsdl2-native"
 
 # CONF_VERSION is increased each time build/conf/ changes incompatibly and is used to
 # track the version of this file when it was generated. This can safely be ignored if
 # this doesn't mean anything to you.
 CONF_VERSION = "1"
-
 
 # use systemd
 DISTRO_FEATURES_append = " systemd"
@@ -286,88 +259,6 @@ DISTRO_FEATURES_BACKFILL_CONSIDERED += "sysvinit"
 VIRTUAL-RUNTIME_init_manager = "systemd"
 VIRTUAL-RUNTIME_dev_manager = "systemd"
 VIRTUAL-RUNTIME_initscripts = "systemd-compat-units"
-
-
-# application
-CORE_IMAGE_EXTRA_INSTALL += "debugservice"
-CORE_IMAGE_EXTRA_INSTALL += "debugif"
-
-# include static lib and headers in sdk
-TOOLCHAIN_TARGET_TASK += "libfpgaregion-dev libfpgaregion-staticdev"
-
-TOOLCHAIN_TARGET_TASK += "libwebsockets-dev"
-TOOLCHAIN_TARGET_TASK += "poco-dev"
-
-# additional software
-CORE_IMAGE_EXTRA_INSTALL += "htop"
-CORE_IMAGE_EXTRA_INSTALL += "bash"
-CORE_IMAGE_EXTRA_INSTALL += "gdbserver"
-
-CORE_IMAGE_EXTRA_INSTALL += "tzdata"
-CORE_IMAGE_EXTRA_INSTALL += "ntp"
-
-CORE_IMAGE_EXTRA_INSTALL += "screen"
-CORE_IMAGE_EXTRA_INSTALL += "libwebsockets"
-CORE_IMAGE_EXTRA_INSTALL += "nginx"
-CORE_IMAGE_EXTRA_INSTALL += "apt"
-CORE_IMAGE_EXTRA_INSTALL += "nano"
-#CORE_IMAGE_EXTRA_INSTALL += "hdparm"
-
-# for pkill
-CORE_IMAGE_EXTRA_INSTALL += "procps"
-
-CORE_IMAGE_EXTRA_INSTALL += "iftop"
-#CORE_IMAGE_EXTRA_INSTALL += "sysbench"
-#CORE_IMAGE_EXTRA_INSTALL += "dhrystone"
-
-# for mpstat
-CORE_IMAGE_EXTRA_INSTALL += "sysstat"
-
-CORE_IMAGE_EXTRA_INSTALL += "poco"
-
-CORE_IMAGE_EXTRA_INSTALL += "dhcp-client"
-
-CORE_IMAGE_EXTRA_INSTALL += "paho-mqtt-c"
-CORE_IMAGE_EXTRA_INSTALL += "paho-mqtt-cpp"
-
-
-# keymaps bindings in /usr/share
-CORE_IMAGE_EXTRA_INSTALL += "kbd"
-CORE_IMAGE_EXTRA_INSTALL += "kbd-keymaps"
-CORE_IMAGE_EXTRA_INSTALL += "gettext"
-CORE_IMAGE_EXTRA_INSTALL += "ncurses"
-CORE_IMAGE_EXTRA_INSTALL += "readline"
-
-# enable sftp for sshd
-CORE_IMAGE_EXTRA_INSTALL += "openssh-sftp"
-CORE_IMAGE_EXTRA_INSTALL += "openssh-sftp-server"
-
-CORE_IMAGE_EXTRA_INSTALL += "dtc"
-
-# test key events
-CORE_IMAGE_EXTRA_INSTALL += "evtest"
-
-# dns resolving
-CORE_IMAGE_EXTRA_INSTALL += "resolvconf"
-
-# gpio chardev lib
-CORE_IMAGE_EXTRA_INSTALL += "libgpiod"
-
-# others
-#CORE_IMAGE_EXTRA_INSTALL += "autofs"
-#CORE_IMAGE_EXTRA_INSTALL += "iperf3"
-
-
-
-
-# wifi rt2800usb
-#DISTRO_FEATURES_append = " wifi"
-#CORE_IMAGE_EXTRA_INSTALL += "usbutils"
-#MACHINE_EXTRA_RRECOMMENDS += "kernel-module-rt2800usb"
-#CORE_IMAGE_EXTRA_INSTALL += "linux-firmware-ralink"
-#CORE_IMAGE_EXTRA_INSTALL += "crda"
-#CORE_IMAGE_EXTRA_INSTALL += "wireless-tools"
-
 
 # delete work tmp data after packet done => free some disk space
 INHERIT += "rm_work"
