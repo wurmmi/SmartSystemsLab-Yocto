@@ -41,11 +41,11 @@ EXTRA_IMAGE_FEATURES = "debug-tweaks tools-debug debug-tweaks ssh-server-openssh
 PACKAGE_FEED_URIS = "http://192.168.1.100:8080"
 
 # applications and kernel drivers
-IMAGE_INSTALL += "mpu9250-mod"
-IMAGE_INSTALL += "apds9301-mod"
-IMAGE_INSTALL += "sevensegment-mod"
-IMAGE_INSTALL += "hc1000-mod"
-IMAGE_INSTALL += "sensorplatform"
+#IMAGE_INSTALL += "mpu9250-mod"
+#IMAGE_INSTALL += "apds9301-mod"
+#IMAGE_INSTALL += "sevensegment-mod"
+#IMAGE_INSTALL += "hc1000-mod"
+#IMAGE_INSTALL += "sensorplatform"
 #IMAGE_INSTALL += "iiotapp"
 #IMAGE_INSTALL += "managementif"
 IMAGE_INSTALL += "debugservice"
