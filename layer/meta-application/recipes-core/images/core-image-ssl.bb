@@ -43,11 +43,12 @@ PACKAGE_FEED_URIS = "http://192.168.1.100:8080"
 # applications and kernel drivers
 #IMAGE_INSTALL += "mpu9250-mod"
 #IMAGE_INSTALL += "apds9301-mod"
-#IMAGE_INSTALL += "sevensegment-mod"
+IMAGE_INSTALL += "sevensegment-mod"
 #IMAGE_INSTALL += "hc1000-mod"
 #IMAGE_INSTALL += "sensorplatform"
 #IMAGE_INSTALL += "iiotapp"
 #IMAGE_INSTALL += "managementif"
+IMAGE_INSTALL += "show-ip"
 IMAGE_INSTALL += "debugservice"
 IMAGE_INSTALL += "debugif"
 
@@ -80,14 +81,14 @@ IMAGE_INSTALL += "nano"
 IMAGE_INSTALL += "hdparm"
 IMAGE_INSTALL += "wget"
 # for pkill
-IMAGE_INSTALL += "procps" 
+IMAGE_INSTALL += "procps"
 IMAGE_INSTALL += "iftop"
 #IMAGE_INSTALL += "sysbench"
 #IMAGE_INSTALL += "dhrystone"
 # for mpstat
-IMAGE_INSTALL += "sysstat" 
+IMAGE_INSTALL += "sysstat"
 # test key events
-IMAGE_INSTALL += "evtest" 
+IMAGE_INSTALL += "evtest"
 
 # enable sftp for sshd
 IMAGE_INSTALL += "openssh-sftp"
@@ -111,6 +112,3 @@ IMAGE_INSTALL += "resolvconf"
 # others
 #IMAGE_INSTALL += "autofs"
 #IMAGE_INSTALL += "iperf3"
-
-
-
