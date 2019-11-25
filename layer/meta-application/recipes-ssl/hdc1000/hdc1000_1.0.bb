@@ -2,6 +2,7 @@ DESCRIPTION = "Application which reads data from the kernel module and sends it 
 LICENSE = "CLOSED"
 
 DEPENDS += "paho-mqtt-c paho-mqtt-cpp"
+DEPENDS += "libfpgaregion"
 RDEPENDS_${PN} += "paho-mqtt-c paho-mqtt-cpp"
 
 SRCREV = "${AUTOREV}"
