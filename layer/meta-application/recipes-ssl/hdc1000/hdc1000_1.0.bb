@@ -6,7 +6,7 @@ DEPENDS += "libfpgaregion"
 RDEPENDS_${PN} += "paho-mqtt-c paho-mqtt-cpp"
 
 SRCREV = "${AUTOREV}"
-SRC_URI = "git://github.com/skaupper/SmartSystemsLab.git;protocol=http;branch=skaupper/hdc1000-app"
+SRC_URI = "git://github.com/skaupper/SmartSystemsLab.git;protocol=http;branch=master"
 
 S = "${WORKDIR}/git/user/hdc1000"
 
