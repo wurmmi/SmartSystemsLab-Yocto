@@ -1,8 +1,7 @@
 DESCRIPTION = "Application which reads data from the kernel module and sends it to the cloud"
 LICENSE = "CLOSED"
 
-DEPENDS += "paho-mqtt-c paho-mqtt-cpp"
-DEPENDS += "libfpgaregion"
+DEPENDS += "paho-mqtt-c paho-mqtt-cpp libfpgaregion"
 RDEPENDS_${PN} += "paho-mqtt-c paho-mqtt-cpp"
 
 SRCREV = "${AUTOREV}"
