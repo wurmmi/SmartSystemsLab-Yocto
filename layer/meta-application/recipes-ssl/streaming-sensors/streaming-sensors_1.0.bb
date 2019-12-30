@@ -5,7 +5,7 @@ DEPENDS += "paho-mqtt-c paho-mqtt-cpp libfpgaregion"
 RDEPENDS_${PN} += "paho-mqtt-c paho-mqtt-cpp"
 
 SRCREV = "${AUTOREV}"
-SRC_URI = "git://github.com/skaupper/SmartSystemsLab.git;protocol=http;branch=skaupper/app_mpu9250_apds931"
+SRC_URI = "git://github.com/skaupper/SmartSystemsLab.git;protocol=http;branch=master"
 
 S = "${WORKDIR}/git/user/streaming_sensors"
 
