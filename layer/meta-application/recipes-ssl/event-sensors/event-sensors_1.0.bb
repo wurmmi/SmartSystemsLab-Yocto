@@ -6,7 +6,7 @@ DEPENDS += "paho-mqtt-c paho-mqtt-cpp libfpgaregion"
 RDEPENDS_${PN} += "paho-mqtt-c paho-mqtt-cpp"
 
 SRCREV = "${AUTOREV}"
-SRC_URI = "git://github.com/skaupper/SmartSystemsLab.git;protocol=http;branch=master"
+SRC_URI = "git://github.com/skaupper/SmartSystemsLab.git;protocol=http;branch=skaupper/user_space_shock_detection"
 SRC_URI += "file://event_sensors.service"
 
 S = "${WORKDIR}/git/user/event_sensors"
@@ -24,7 +24,7 @@ do_install() {
     install -m 0755 ${S}/event_sensors ${D}${bindir}/
 }
 
-FILES_${PN} = "${base_libdir}/systemd/system/event-sensors.service"
+FILES_${PN} = "${base_libdir}/systemd/system/event_sensors.service"
 FILES_${PN} += "${bindir}/event_sensors"
 FILES_${PN} += "${sysconfdir}/event_sensors"
 FILES_${PN} += "${base_libdir}/firmware"

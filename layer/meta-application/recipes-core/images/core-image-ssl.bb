@@ -51,6 +51,7 @@ IMAGE_INSTALL += "hdc1000-mod"
 IMAGE_INSTALL += "show-ip"
 IMAGE_INSTALL += "hdc1000"
 IMAGE_INSTALL += "streaming-sensors"
+IMAGE_INSTALL += "event-sensors"
 IMAGE_INSTALL += "debugservice"
 IMAGE_INSTALL += "debugif"
 
