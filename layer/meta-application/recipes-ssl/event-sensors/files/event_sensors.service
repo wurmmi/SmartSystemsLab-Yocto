@@ -1,0 +1,9 @@
+[Unit]
+Description=EventSensorsService daemon
+
+[Service]
+ExecStart=/usr/bin/event_sensors
+ExecStop=/usr/bin/killall -s KILL event_sensors
+
+[Install]
+WantedBy=basic.target
