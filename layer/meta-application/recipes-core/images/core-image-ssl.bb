@@ -54,6 +54,7 @@ IMAGE_INSTALL += "streaming-sensors"
 IMAGE_INSTALL += "event-sensors"
 IMAGE_INSTALL += "debugservice"
 IMAGE_INSTALL += "debugif"
+IMAGE_INSTALL += "sensorplatform"
 
 
 # libraries
