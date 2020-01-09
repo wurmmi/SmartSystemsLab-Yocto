@@ -16,10 +16,15 @@ TARGET_CC_ARCH += "${LDFLAGS}"
 inherit systemd
 
 do_install() {
-	# install service file
+    # install TLS certificate
+    install -d ${D}/${sysconfdir}/SmartSystemsLab
+    install -c -m 0644 ${S}/ca.crt ${D}/${sysconfdir}/SmartSystemsLab
+
+    # install service file
     install -d ${D}${systemd_unitdir}/system
     install -c -m 0644 ${WORKDIR}/event_sensors.service ${D}${systemd_unitdir}/system
-	
+
+    # instlal binary
     install -m 0755 -d ${D}${bindir}
     install -m 0755 ${S}/event_sensors ${D}${bindir}/
 }
@@ -28,3 +33,4 @@ FILES_${PN} = "${base_libdir}/systemd/system/event_sensors.service"
 FILES_${PN} += "${bindir}/event_sensors"
 FILES_${PN} += "${sysconfdir}/event_sensors"
 FILES_${PN} += "${base_libdir}/firmware"
+FILES_${PN} += "${sysconfdir}/SmartSystemsLab"
