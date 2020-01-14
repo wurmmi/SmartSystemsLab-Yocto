@@ -64,6 +64,7 @@ IMAGE_INSTALL += "paho-mqtt-c"
 IMAGE_INSTALL += "paho-mqtt-cpp"
 # gpio chardev lib
 IMAGE_INSTALL += "libgpiod"
+IMAGE_INSTALL += "zlib"
 
 # include static lib and headerfiles in sdk
 TOOLCHAIN_TARGET_TASK += "libfpgaregion-dev libfpgaregion-staticdev"

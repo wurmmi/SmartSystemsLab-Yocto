@@ -2,7 +2,7 @@ DESCRIPTION = "Application which reads data from all provided sensors and forwar
 LICENSE = "CLOSED"
 FILESEXTRAPATHS_prepend := "${THISDIR}/files/:"
 
-DEPENDS += "paho-mqtt-c paho-mqtt-cpp libfpgaregion"
+DEPENDS += "paho-mqtt-c paho-mqtt-cpp libfpgaregion zlib"
 RDEPENDS_${PN} += "paho-mqtt-c paho-mqtt-cpp"
 
 SRCREV = "${AUTOREV}"
