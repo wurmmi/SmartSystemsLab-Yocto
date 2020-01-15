@@ -6,30 +6,34 @@ DEPENDS += "paho-mqtt-c paho-mqtt-cpp libfpgaregion zlib"
 RDEPENDS_${PN} += "paho-mqtt-c paho-mqtt-cpp"
 
 SRCREV = "${AUTOREV}"
-SRC_URI = "git://github.com/skaupper/SmartSystemsLab.git;protocol=http;branch=skaupper/user_space_shock_detection"
+SRC_URI = "git://github.com/skaupper/SmartSystemsLab.git;protocol=http;branch=master"
 SRC_URI += "file://event_sensors.service"
+
 
 S = "${WORKDIR}/git/user/event_sensors"
 
 TARGET_CC_ARCH += "${LDFLAGS}"
 
+
 inherit systemd
+SYSTEMD_SERVICE_${PN} = "event_sensors.service"
+
 
 do_install() {
     # install TLS certificate
     install -d ${D}/${sysconfdir}/SmartSystemsLab
     install -c -m 0644 ${S}/ca.crt ${D}/${sysconfdir}/SmartSystemsLab
 
-    # install service file
-    install -d ${D}${systemd_unitdir}/system
-    install -c -m 0644 ${WORKDIR}/event_sensors.service ${D}${systemd_unitdir}/system
+	# install service file
+    install -d ${D}${systemd_system_unitdir}
+    install -c -m 0644 ${WORKDIR}/event_sensors.service ${D}${systemd_system_unitdir}
 
     # instlal binary
     install -m 0755 -d ${D}${bindir}
-    install -m 0755 ${S}/event_sensors ${D}${bindir}/
+    install -m 0755 ${S}/event_sensors ${D}${bindir}
 }
 
-FILES_${PN} = "${base_libdir}/systemd/system/event_sensors.service"
+FILES_${PN} = "${systemd_system_unitdir}/event_sensors.service"
 FILES_${PN} += "${bindir}/event_sensors"
 FILES_${PN} += "${sysconfdir}/event_sensors"
 FILES_${PN} += "${base_libdir}/firmware"
