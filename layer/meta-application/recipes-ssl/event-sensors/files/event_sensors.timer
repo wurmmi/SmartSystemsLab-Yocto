@@ -1,0 +1,5 @@
+[Install]
+WantedBy=basic.target
+
+[Timer]
+OnBootSec=2min

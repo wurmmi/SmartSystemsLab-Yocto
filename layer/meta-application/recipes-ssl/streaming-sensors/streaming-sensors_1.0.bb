@@ -16,4 +16,4 @@ do_install() {
     install -m 0755 ${S}/streaming_sensors ${D}${bindir}/
 }
 
-FILES_${PN} = ${bindir}/streaming_sensors
+FILES_${PN} = "${bindir}/streaming_sensors"

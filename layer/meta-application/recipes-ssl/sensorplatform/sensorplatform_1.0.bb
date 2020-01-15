@@ -10,7 +10,7 @@ SRCREV = "${AUTOREV}"
 
 DEPENDS += "dtc-native"
 
-OUTPUT = "${WORKDIR}/git/artifacts/MS3"
+OUTPUT = "${WORKDIR}/git/artifacts/latest"
 
 do_configure() {
 	dtc -I "dts" -O "dtb" -o ${WORKDIR}/socfpga.dtbo ${OUTPUT}/socfpga.dtso
@@ -18,7 +18,7 @@ do_configure() {
 
 do_install() {
 	install -d -m 0755 ${D}${base_libdir}/firmware
-	
+
 	install -m 0666 ${OUTPUT}/socfpga.rbf ${D}${base_libdir}/firmware/socfpga.rbf
 	install -m 0666 ${WORKDIR}/socfpga.dtbo ${D}${base_libdir}/firmware/socfpga.dtbo
 }

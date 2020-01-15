@@ -13,4 +13,4 @@ do_install() {
     install -m 0755 ${S}/show_ip ${D}${bindir}/
 }
 
-FILES_${PN} = ${bindir}/show_ip
+FILES_${PN} = "${bindir}/show_ip"

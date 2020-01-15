@@ -16,4 +16,4 @@ do_install() {
     install -m 0755 ${S}/hdc1000 ${D}${bindir}/
 }
 
-FILES_${PN} = ${bindir}/hdc1000
+FILES_${PN} = "${bindir}/hdc1000"
