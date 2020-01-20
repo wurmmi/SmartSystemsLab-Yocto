@@ -2,7 +2,7 @@
 Description=EventSensorsService daemon
 
 [Service]
-ExecStart=/usr/bin/event_sensors
+ExecStart=/usr/bin/event_sensors 30000
 ExecStop=/usr/bin/killall -s KILL event_sensors
 
 [Install]
